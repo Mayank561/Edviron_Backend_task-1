@@ -1,0 +1,24 @@
+service: defaulter
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  stage: prod3
+  region: us-east-1
+  environment:
+       moongoseAtlasurl:  mongodb+srv://assignment:edviron@cluster1.focovdw.mongodb.net
+       port: 8000
+ 
+  
+functions:
+  app:
+    handler: lamda.handler
+    events:
+      - http:
+          path: student
+          method: ANY
+          cors: true
+      - http:
+          path: /{proxy+}
+          method: ANY
+          cors: true
